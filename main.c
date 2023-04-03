@@ -2,6 +2,7 @@
 #include <Addison.h>
 #include <Madelyn.h>
 #include <Eddie.h>
+#include <Thomas.h>
 
 const int RMP=0;//right motor
 const int LMP=3;//left motor
@@ -16,8 +17,9 @@ const int SPEED=1500;
 int main()
 {
     printf("Hello World\n");
-     //Wait for light MP
     
+ //   enable_servos();
+     //Wait for light MP  
     //shut down in 120 seconds
     shut_down_in (120);
     
@@ -34,29 +36,31 @@ int main()
     
     //Pick up cube AF
     pickUpCube(SP,CLAW_CLOSE);
-    
+   
     //Find wall with ET sensor MP
     findWall(ETS,RMP,LMP);
     //move backwards following wall w/ et sensor VN
     
     //are tougch sensors engaged VN
-    
+  
     //move forward TK
-    
     //Is there a black line TK
+    findBlackLine(1000, THP, LMP, RMP);
     
     //turn LEFT 90 degrees TK
-    
+    turnLeft90(1000, RMP);
     //follow black line TK
-    
+    fLineToLimit(LMP,RMP,SPEED,THP, 3000, 300);
     //turn LEFT 90 degrees TK
+    turnLeft90(1000, RMP);
     
     //Follow Black line ER
-    fblackline(LMP,RMP,SPEED,THP,LS);
+    int black= (3390 + 192) / 2;
+    fblacklineToTouch(LMP,RMP,SPEED,THP,LS, black);
     //is lever sensor Engaged VN
     
     //release cube AF
     releaseCube(1,CLAW_OPEN);
-    
+  //  disable_servos();
     return 0;
 }

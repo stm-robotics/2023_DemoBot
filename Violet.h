@@ -1,3 +1,4 @@
+#include <kipr/wombat.h>
 void DebugPrint(char message[]);
 void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT);
 
@@ -10,7 +11,7 @@ void DebugPrint(char message[])
 {
     if (DEBUG_MODE){
         printf("%s\n",message);
-        msleep(3000);
+        msleep(300);
     }
 }
 
@@ -28,26 +29,36 @@ void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT)
        /* if(analog(ET_PORT) >= ET_WALL){
             bDriveRight = !bDriveRight;
         }*/
-        int iETVal = analog(ET_PORT);
-        printf("%d: ", iETVal);
-        if(iETVal > ET_MIN_RANGE && iETVal < ET_MAX_RANGE){
+       // int iETVal = analog(ET_PORT);
+      
+        printf("%d: ", analog(ET_PORT));
+        if(analog(ET_PORT) > ET_MIN_RANGE && analog(ET_PORT) < ET_MAX_RANGE){
             printf("drive straight\n");
-        	iLeftWheelSpeed = 55;
-            iRightWheelSpeed = 55;
+        	iLeftWheelSpeed = 550;
+            iRightWheelSpeed = 550;
+            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+         
         }
-        else if (iETVal >= ET_MIN_RANGE){
+        else if (analog(ET_PORT) >= ET_MIN_RANGE){
             printf("drive left\n");
-        	iLeftWheelSpeed = 45;
-            iRightWheelSpeed = 55;
+        	iLeftWheelSpeed = -450;
+            iRightWheelSpeed = 550;
+            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+            
         }
-         else if (iETVal <= ET_MAX_RANGE){ 
+         else if (analog(ET_PORT) <= ET_MAX_RANGE){ 
              printf("drive right\n");
-        	iLeftWheelSpeed = 55;
-            iRightWheelSpeed = 45;
+            
+        	iLeftWheelSpeed = 550;
+            iRightWheelSpeed = -450;
+            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+           
          }
-        motor(LEFTWHEEL_PORT,iLeftWheelSpeed);
-        motor(RIGHTWHEEL_PORT,iRightWheelSpeed);
-       
+        
+        
         
         iCounter += 1;
     }

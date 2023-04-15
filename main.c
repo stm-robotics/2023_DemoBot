@@ -1,8 +1,10 @@
+#include <Violet.h>
 #include <kipr/wombat.h>
 #include <Addison.h>
 #include <Madelyn.h>
 #include <Eddie.h>
 #include <Thomas.h>
+
 
 const int RMP=0;//right motor
 const int LMP=3;//left motor
@@ -18,25 +20,31 @@ int main()
 {
     printf("Hello World\n");
     
- //   enable_servos();
-     //Wait for light MP  
+    releaseCube(SP,CLAW_OPEN);
+    //open claw
+    
+     set_servo_enabled(SP,1);
+     //Wait for light MP 
+    
     //shut down in 120 seconds
     shut_down_in (120);
-    
+/*   
     //turn right 90 degrees AF
     turnRight(RMP,LMP);
     
     //Find Wall with ET Sensor MP
-    findWall(ETS,RMP,LMP);
+    //findWall(ETS,RMP,LMP);
     
     //move forward following wall with ET Sensor VN
-   
+    followWall(ETS,LMP,RMP);
+*/    
     //is robot alighned to cube ER
     alignToCube(LMP,RMP,SPEED);
-    
+    driveToTouch(LMP,RMP,1000,LS);
     //Pick up cube AF
     pickUpCube(SP,CLAW_CLOSE);
-   
+    set_servo_enabled(SP,0);
+return 0;
     //Find wall with ET sensor MP
     findWall(ETS,RMP,LMP);
     //move backwards following wall w/ et sensor VN

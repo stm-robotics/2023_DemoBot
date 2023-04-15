@@ -14,11 +14,15 @@ const int COLOR_BLACK = 1;
 const int COLOR_WHITE = 0;
 
 void alignToCube(int Lmp, int Rmp, int Speed)
-{//using motor0 and motor3 (motor0 backward and motor3 forward)
-    mav(Rmp,Speed);
+{
+    DebugPrint("ER align cube");
+    //using motor0 and motor3 (motor0 backward and motor3 forward)
+    mav(Rmp,-1*Speed);
     mav(Lmp,Speed);
-    msleep(2000);
+    msleep(50);
+    alloff();
 }
+	
 //-----------------------------------------------------------------------------------------------------------------------------
 void fblacklineToTouch(int Lmp, int Rmp, int Speed, int Tpp, int Tsp, int black)
 //lmp=leftmotorport
@@ -27,6 +31,7 @@ void fblacklineToTouch(int Lmp, int Rmp, int Speed, int Tpp, int Tsp, int black)
 //tpp=tophatport(0)
 //tsp=touchsensorport
 {
+	DebugPrint("ER follow black line to touch");
     printf("Following black line\n");
   //  msleep(3000);
     //what the black line is is in the next two lines
@@ -42,6 +47,19 @@ void fblacklineToTouch(int Lmp, int Rmp, int Speed, int Tpp, int Tsp, int black)
     ao();
 }
 
+void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
+{
+    DebugPrint("ER graping the fire wall; stopping on touch");
+    
+    while (digital(Tsp) == 0)
+    {
+	    //drive straight
+        mav(Rmp,Speed);
+        mav(Lmp,Speed);
+    }
+    
+    ao();
+}
 
 void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
 {
@@ -49,6 +67,7 @@ void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
     int colorCurrent;
     int colorPrev;
     
+    DebugPrint("ER follow line to limit");
     printf("fLineToLimit\n");
   //  msleep(3000);
     while(colorCount <= limit){
@@ -67,6 +86,7 @@ void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
     ao();
     
 }
+	
 
 int lineFollow(int Lmp, int Rmp, int Speed, int Tpp, int black)
 {

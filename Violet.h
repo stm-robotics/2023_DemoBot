@@ -1,4 +1,3 @@
-#include <kipr/wombat.h>
 void DebugPrint(char message[]);
 void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT);
 
@@ -11,61 +10,60 @@ void DebugPrint(char message[])
 {
     if (DEBUG_MODE){
         printf("%s\n",message);
-        msleep(300);
+        msleep(3000);
     }
 }
+
 
 
 void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT)
 {
-    int iMaxIterations = 10000;
-    int iCounter = 0;
+    int iMaxTime = 5500;
+    int iCurrentTime = 0;
     int bDriveRight = 0;
     int iLeftWheelSpeed;
     int iRightWheelSpeed;
-    while(iCounter < iMaxIterations){
-        //read et sensor
-        //if et sensor greater or equal to 2900, change direction
-       /* if(analog(ET_PORT) >= ET_WALL){
-            bDriveRight = !bDriveRight;
-        }*/
-       // int iETVal = analog(ET_PORT);
-      
+    while(iCurrentTime < iMaxTime){     
         printf("%d: ", analog(ET_PORT));
-        if(analog(ET_PORT) > ET_MIN_RANGE && analog(ET_PORT) < ET_MAX_RANGE){
-            printf("drive straight\n");
-        	iLeftWheelSpeed = 550;
-            iRightWheelSpeed = 550;
-            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
-            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
-         
+        if (analog(ET_PORT) >= ET_MIN_RANGE && analog(ET_PORT) <= ET_MAX_RANGE) {
+            while (iCurrentTime < iMaxTime && analog(ET_PORT) >= ET_MIN_RANGE && analog(ET_PORT) <= ET_MAX_RANGE) {
+            	printf("drive straight - %d\n", iCurrentTime);
+        		iLeftWheelSpeed = 1500;
+            	iRightWheelSpeed = 1500;
+            	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            	mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+           	 	msleep(1);
+                iCurrentTime += 3;
+            }
         }
-        else if (analog(ET_PORT) >= ET_MIN_RANGE){
-            printf("drive left\n");
-        	iLeftWheelSpeed = -450;
-            iRightWheelSpeed = 550;
-            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
-            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+        if (analog(ET_PORT) > ET_MIN_RANGE) {
+            while (iCurrentTime < iMaxTime && analog(ET_PORT) > ET_MAX_RANGE) {
+            	printf("drive left - %d\n", iCurrentTime);
+                printf("ET SENSOR = %i\n", analog(ET_PORT));
+        		iLeftWheelSpeed = 200;
+            	iRightWheelSpeed = 500;
+            	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            	mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+                msleep(1);
+                iCurrentTime += 3;
+            }
             
         }
-         else if (analog(ET_PORT) <= ET_MAX_RANGE){ 
-             printf("drive right\n");
-            
-        	iLeftWheelSpeed = 550;
-            iRightWheelSpeed = -450;
-            mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
-            mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
-           
-         }
+        else if (analog(ET_PORT) < ET_MIN_RANGE){ 
+            while (iCurrentTime < iMaxTime && analog(ET_PORT) < ET_MAX_RANGE) {
+            	printf("gentle drive right - %d\n", iCurrentTime);
+                printf("ET SENSOR = %i\n", analog(ET_PORT));
+        		iLeftWheelSpeed = 1500;
+            	iRightWheelSpeed = 1350;
+            	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
+            	mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
+                msleep(1);
+                iCurrentTime += 3;
+            }
+         }    
         
-        
-        
-        iCounter += 1;
     }
- 
-  
 }
-
 void moveBackwards()
 {
     

@@ -19,7 +19,7 @@ void alignToCube(int Lmp, int Rmp, int Speed)
     //using motor0 and motor3 (motor0 backward and motor3 forward)
     mav(Rmp,-1*Speed);
     mav(Lmp,Speed);
-    msleep(50);
+    msleep(150);
     alloff();
 }
 	
@@ -60,7 +60,6 @@ void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
     
     ao();
 }
-
 void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
 {
 	int colorCount = 0;

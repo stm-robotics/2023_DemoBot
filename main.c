@@ -1,5 +1,5 @@
-#include <Violet.h>
 #include <kipr/wombat.h>
+#include <Violet.h>
 #include <Addison.h>
 #include <Madelyn.h>
 #include <Eddie.h>
@@ -12,8 +12,12 @@ const int SP=1;//servo
 const int ETS=1;//et sensor
 const int LS=0;//touch sensor
 const int THP=0;//top hat
-const int CLAW_CLOSE = 770;
-const int CLAW_OPEN = 2045;
+const int LBP=8;//left button
+const int RBP=9;//right button
+
+
+const int CLAW_CLOSE = 945;
+const int CLAW_OPEN = 2047;
 const int SPEED=1500;
 
 int main()
@@ -44,7 +48,11 @@ int main()
     driveToTouch(LMP,RMP,1000,LS);
     //Pick up cube AF
     backUp (RMP,LMP);
+    
+    
     pickUpCube(SP,CLAW_CLOSE);
+    
+    followWallBack(ETS,LMP,RMP, LBP, RBP);
     set_servo_enabled(SP,0);
 return 0;
     //Find wall with ET sensor MP

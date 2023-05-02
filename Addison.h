@@ -10,8 +10,13 @@ void turnRight(int RIGHT_MOTOR_PORT, int LEFT_MOTOR_PORT)
 	//move_to_position(RIGHT_MOTOR_PORT,-500,-1500/4);
     //move_to_position(LEFT_MOTOR_PORT,500,1500/4);
     //msleep(3000);
-    mrp(LEFT_MOTOR_PORT,-1000,3000);
-    msleep(2500);
+    //mrp(LEFT_MOTOR_PORT,-1000,3000); //changed 5/1/23 from 3000 to 2556 //this should be mav
+    //mav(RIGHT_MOTOR_PORT,-700);
+    //mav(LEFT_MOTOR_PORT,900);
+    cmpc(RIGHT_MOTOR_PORT);
+    cmpc(LEFT_MOTOR_PORT);
+    mtp(LEFT_MOTOR_PORT,1000, 2500);
+    msleep(4000);
 }
 
 void pickUpCube(int CLAW_PORT, int CLAW_CLOSE)
@@ -19,7 +24,7 @@ void pickUpCube(int CLAW_PORT, int CLAW_CLOSE)
     DebugPrint("AF pick up cube");
 	set_servo_position(CLAW_PORT, CLAW_CLOSE); 
         
-    msleep(1000);
+    //msleep(1000);
 
 }
 
@@ -34,7 +39,7 @@ void backUp (int RIGHT_MOTOR_PORT, int LEFT_MOTOR_PORT)
     DebugPrint("AF back up");
     mav(RIGHT_MOTOR_PORT,-1500);
     mav(LEFT_MOTOR_PORT,-1500);
-    msleep(150);
+    msleep(100);
     
     ao();
 }

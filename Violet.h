@@ -20,7 +20,7 @@ void DebugPrint(char message[])
 
 void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT)
 {
-    int iMaxTime = 8000;
+    int iMaxTime = 7000;
     int iCurrentTime = 0;
     int bDriveRight = 0;
     int iLeftWheelSpeed;
@@ -88,7 +88,7 @@ void followWallBack(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT, int LE
             	iRightWheelSpeed = -1500;
             	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
             	mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
-           	 	msleep(1);
+           	 	msleep(100);
                 iCurrentTime += 3;
             }
         }
@@ -100,13 +100,15 @@ void followWallBack(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT, int LE
             	iRightWheelSpeed = -300;
             	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
             	mav(RIGHTWHEEL_PORT,iRightWheelSpeed);
-                msleep(1);
+                msleep(100);
                 iCurrentTime += 3;
             }
             
         }
+        //changed 5/1
         else if (analog(ET_PORT) < ET_MIN_RANGE){ 
-            while (!(digital(LEFTBUTTON_PORT) || digital(RIGHTBUTTON_PORT)) && analog(ET_PORT) < ET_MAX_RANGE) {
+           //while (!(digital(LEFTBUTTON_PORT) || digital(RIGHTBUTTON_PORT)) && analog(ET_PORT) < ET_MAX_RANGE) {
+            while (!(digital(LEFTBUTTON_PORT) || digital(RIGHTBUTTON_PORT)) && analog(ET_PORT) < ET_MIN_RANGE) {
             	printf("gentle drive right - %d\n", iCurrentTime);
                 printf("ET SENSOR = %i\n", analog(ET_PORT));
         		iLeftWheelSpeed = -1500;

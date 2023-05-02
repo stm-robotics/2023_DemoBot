@@ -2,7 +2,7 @@
 void findBlackLine(int vel, int TOPHAT_PORT, int LEFT_MOTOR, int RIGHT_MOTOR);
 void turnLeft90(int vel, int RIGHT_MOTOR);
 
-const int TOPHAT_BLACK = 3000;
+const int TOPHAT_BLACK = 3200;
 const int MAX_TICKS = 1500;
 
 //function definitions
@@ -17,7 +17,7 @@ void findBlackLine(int vel, int TOPHAT_PORT, int LEFT_MOTOR, int RIGHT_MOTOR)
         mav(RIGHT_MOTOR, vel);
     }
     ao();
-    msleep(1000);
+    //msleep(1000);
 }
 
 void turnLeft90(int vel, int RIGHT_MOTOR)

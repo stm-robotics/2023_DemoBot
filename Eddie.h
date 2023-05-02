@@ -45,7 +45,7 @@ void fblacklineToTouch(int Lmp, int Rmp, int Speed, int Tpp, int Tsp, int black)
     }
     
     ao();
-    msleep(1000);
+    //msleep(1000);
 }
 
 void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
@@ -60,7 +60,7 @@ void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
     }
     
     ao();
-    msleep(1000);
+   // msleep(1000);
 }
 void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
 {
@@ -85,7 +85,7 @@ void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
         }
     }
     ao();
-    msleep(1000);
+    //msleep(1000);
 }
 	
 

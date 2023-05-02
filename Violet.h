@@ -20,7 +20,7 @@ void DebugPrint(char message[])
 
 void followWall(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT)
 {
-    int iMaxTime = 5500;
+    int iMaxTime = 8000;
     int iCurrentTime = 0;
     int bDriveRight = 0;
     int iLeftWheelSpeed;
@@ -77,9 +77,13 @@ void followWallBack(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT, int LE
     int iRightWheelSpeed;
     while(!(digital(LEFTBUTTON_PORT) || digital(RIGHTBUTTON_PORT))){     
         printf("%d: ", analog(ET_PORT));
+        printf("%i: ", digital(LEFTBUTTON_PORT));
+        printf("%i: ", digital(RIGHTBUTTON_PORT));
         if (analog(ET_PORT) >= ET_MIN_RANGE && analog(ET_PORT) <= ET_MAX_RANGE) {
             while (!(digital(LEFTBUTTON_PORT) || digital(RIGHTBUTTON_PORT)) && analog(ET_PORT) >= ET_MIN_RANGE && analog(ET_PORT) <= ET_MAX_RANGE) {
             	printf("drive straight - %d\n", iCurrentTime);
+                printf("%i: ", digital(LEFTBUTTON_PORT));
+       			printf("%i: ", digital(RIGHTBUTTON_PORT));
         		iLeftWheelSpeed = -1500;
             	iRightWheelSpeed = -1500;
             	mav(LEFTWHEEL_PORT,iLeftWheelSpeed);
@@ -115,4 +119,7 @@ void followWallBack(int ET_PORT, int LEFTWHEEL_PORT, int RIGHTWHEEL_PORT, int LE
          }    
         
     }
+    printf("Left Button = %i: \n", digital(LEFTBUTTON_PORT));
+    printf("Right Button = %i: \n", digital(RIGHTBUTTON_PORT));
+    ao();
 }

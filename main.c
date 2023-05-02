@@ -23,16 +23,17 @@ const int SPEED=1500;
 int main()
 {
     printf("Hello World\n");
+    //Wait for light MP 
+    //Located in Madelyn .h
+    //shut down in 120 seconds
+    
+    shut_down_in (120);
+    
+    set_servo_enabled(SP,1);
     
     releaseCube(SP,CLAW_OPEN);
     //open claw
     //Located in Addison.h
-    
-     set_servo_enabled(SP,1);
-     //Wait for light MP 
-    //Located in Madelyn .h
-    //shut down in 120 seconds
-    shut_down_in (120);
     
     //turn right 90 degrees AF
     turnRight(RMP,LMP);
@@ -53,15 +54,15 @@ int main()
     pickUpCube(SP,CLAW_CLOSE);
     
     followWallBack(ETS,LMP,RMP, LBP, RBP);
-    set_servo_enabled(SP,0);
-return 0;
+    //set_servo_enabled(SP,0);
+
     //Find wall with ET sensor MP
-    findWall(ETS,RMP,LMP);
+    //findWall(ETS,RMP,LMP);
     //Located in Madelyn.h 
     //move backwards following wall w/ et sensor VN
     
-    //are tougch sensors engaged VN
-  
+    //are touch sensors engaged VN
+    
     //move forward TK
     //Is there a black line TK
     findBlackLine(1000, THP, LMP, RMP);
@@ -73,14 +74,15 @@ return 0;
     //turn LEFT 90 degrees TK
     turnLeft90(1000, RMP);
     //Located in Thomas.h
+     //release cube AF
+    releaseCube(1,CLAW_OPEN);
+    //Located in Addison.h
     //Follow Black line ER
-    int black= (3390 + 192) / 2;
-    fblacklineToTouch(LMP,RMP,SPEED,THP,LS, black);
+    int black= 3000;
+    fblacklineToTouch(LMP,RMP,SPEED,THP,LS,black);
     //is lever sensor Engaged VN
     
-    //release cube AF
-    releaseCube(1,CLAW_OPEN);
-  //Located in Addison.h
+   
     //  disable_servos();
     return 0;
 }

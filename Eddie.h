@@ -45,6 +45,7 @@ void fblacklineToTouch(int Lmp, int Rmp, int Speed, int Tpp, int Tsp, int black)
     }
     
     ao();
+    msleep(1000);
 }
 
 void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
@@ -59,6 +60,7 @@ void driveToTouch(int Lmp, int Rmp, int Speed, int Tsp)
     }
     
     ao();
+    msleep(1000);
 }
 void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
 {
@@ -83,14 +85,16 @@ void fLineToLimit(int Lmp, int Rmp, int Speed, int Tpp, int black, int limit)
         }
     }
     ao();
-    
+    msleep(1000);
 }
 	
 
 int lineFollow(int Lmp, int Rmp, int Speed, int Tpp, int black)
 {
-     if (analog(Tpp) < black) //white
+    int tppReading = analog(Tpp);
+     if (tppReading < black) //white
      {
+         printf("turn right: %i\n", tppReading);
          // turn right
          mav(Rmp,0.5*Speed);
          mav(Lmp,Speed);
@@ -99,6 +103,7 @@ int lineFollow(int Lmp, int Rmp, int Speed, int Tpp, int black)
      }
      else //black
      {
+         printf("turn left: %i\n", tppReading);
          //turn left
          mav(Rmp,Speed);
          mav(Lmp,0.5*Speed);

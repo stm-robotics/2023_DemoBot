@@ -17,7 +17,7 @@ void findBlackLine(int vel, int TOPHAT_PORT, int LEFT_MOTOR, int RIGHT_MOTOR)
         mav(RIGHT_MOTOR, vel);
     }
     ao();
-    
+    msleep(1000);
 }
 
 void turnLeft90(int vel, int RIGHT_MOTOR)
@@ -27,6 +27,6 @@ void turnLeft90(int vel, int RIGHT_MOTOR)
     printf("Turn left 90\n");
   //  msleep(3000);
     mrp(RIGHT_MOTOR, vel, dPos * MAX_TICKS);
-    msleep(2500);
+    msleep(3500);
 
 }

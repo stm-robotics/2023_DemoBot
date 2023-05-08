@@ -111,3 +111,34 @@ int lineFollow(int Lmp, int Rmp, int Speed, int Tpp, int black)
          return COLOR_BLACK;
      }
 }
+//----------------------------------------------------------------------------------------------------------------------------
+void turnLeft(int RIGHT_MOTOR_PORT, int LEFT_MOTOR_PORT)
+
+{
+	//Use DebugPrint to output the start of the function
+    DebugPrint("Eddie: START turnLeft\n");
+	//cmpc = clear motor position counter
+	//Clear the position counter for the right motor
+    cmpc(RIGHT_MOTOR_PORT);
+	//Clear the position counter for the left motor
+    cmpc(LEFT_MOTOR_PORT);
+ 	//mtp = motor to position
+ 	//Use the left motor to move 2500 clicks at a speed of 1000
+ 	//this will turn the robot 90 degrees to the right
+
+    mtp(RIGHT_MOTOR_PORT,1000,2300);
+
+    
+
+	//msleep to allow the motor command time to function
+
+    msleep(4000);
+
+    
+
+	//Use DebugPrint to output the completion of the function
+
+    DebugPrint("Eddie: FINISH turnLeft\n");
+
+}
+
